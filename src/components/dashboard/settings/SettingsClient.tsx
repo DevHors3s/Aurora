@@ -39,7 +39,7 @@ export function SettingsClient({ business, appUrl }: { business: Business; appUr
     <div className="max-w-2xl space-y-8">
       <div>
         <h1 className="text-3xl font-semibold tracking-tight">Configuracion</h1>
-        <p className="text-muted-foreground text-sm mt-1">Ajustes de tu negocio en Turnio</p>
+        <p className="text-muted-foreground text-sm mt-1">Ajustes de tu negocio en Aurora</p>
       </div>
 
       {/* Link de reservas */}

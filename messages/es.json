@@ -10,7 +10,7 @@
     "badge": "Beta — Barberias en Lima",
     "title_1": "Tus clientes reservan solos.",
     "title_2": "Tu cobras mas.",
-    "subtitle": "Turnio reemplaza el caos de WhatsApp y cuaderno con una plataforma moderna de citas. Recordatorios automaticos, agenda online y cero no-shows — desde S/. 49/mes.",
+    "subtitle": "Aurora reemplaza el caos de WhatsApp y cuaderno con una plataforma moderna de citas. Recordatorios automaticos, agenda online y cero no-shows — desde S/. 49/mes.",
     "cta_primary": "Crear cuenta gratis",
     "cta_secondary": "Ya tengo cuenta",
     "tagline": "Sin tarjeta de credito · Setup en 10 minutos"
@@ -30,7 +30,7 @@
       "calendar_title": "Agenda inteligente",
       "calendar_body": "Vista semanal tipo Google Calendar. Citas en tiempo real por barbero.",
       "link_title": "Link de reservas propio",
-      "link_body": "turnio.pe/b/tu-barberia — tus clientes reservan en 2 minutos desde su celular.",
+      "link_body": "aurora.pe/b/tu-barberia — tus clientes reservan en 2 minutos desde su celular.",
       "crud_title": "Gestion completa",
       "crud_body": "CRUD de servicios, barberos y horarios. Crea citas manuales en segundos.",
       "slots_title": "Disponibilidad en tiempo real",
@@ -40,9 +40,9 @@
     }
   },
   "testimonials": {
-    "title": "Barberias que ya usan Turnio",
+    "title": "Barberias que ya usan Aurora",
     "items": [
-      { "name": "Carlos M.", "business": "Barberia El Clasico, Miraflores", "text": "Antes perdia el 30% de mis citas por no-shows. Con Turnio bajaron a casi cero. Los recordatorios de WhatsApp son increibles." },
+      { "name": "Carlos M.", "business": "Barberia El Clasico, Miraflores", "text": "Antes perdia el 30% de mis citas por no-shows. Con Aurora bajaron a casi cero. Los recordatorios de WhatsApp son increibles." },
       { "name": "Luis R.", "business": "Studio Fade, San Isidro", "text": "Mis clientes aman poder reservar desde el celular sin llamar. Y yo controlo todo desde el dashboard. Recomendado." },
       { "name": "Miguel A.", "business": "Kings Barber, Surco", "text": "Setup en 10 minutos y ya estaba recibiendo reservas. Nunca habia sido tan facil gestionar mis citas." }
     ]

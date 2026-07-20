@@ -11,7 +11,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Turnio — Tus clientes reservan solos. Tú cobras más.',
+  title: 'Aurora — Tus clientes reservan solos. Tú cobras más.',
   description:
     'SaaS de gestión de citas para barberías y peluquerías en Perú. Recordatorios automáticos por WhatsApp.',
 }

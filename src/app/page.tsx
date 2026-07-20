@@ -21,7 +21,7 @@ export default async function Home() {
             <span className="grid place-items-center size-8 rounded-lg bg-primary/15 text-primary">
               <Scissors className="size-4" />
             </span>
-            Turnio
+            Aurora
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
             <a href="#features" className="hover:text-foreground transition">{t('nav.features')}</a>
@@ -183,10 +183,10 @@ export default async function Home() {
         <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <span className="grid place-items-center size-6 rounded bg-primary/15 text-primary"><Scissors className="size-3" /></span>
-            <span className="font-medium text-foreground">Turnio</span>
+            <span className="font-medium text-foreground">Aurora</span>
             <span>— {t('footer.tagline')}</span>
           </div>
-          <p>© {new Date().getFullYear()} Turnio. {t('footer.rights')}</p>
+          <p>© {new Date().getFullYear()} Aurora. {t('footer.rights')}</p>
         </div>
       </footer>
     </div>

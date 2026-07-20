@@ -34,7 +34,7 @@ export default function LoginPage() {
     <>
       <div className="text-center mb-6">
         <h1 className="text-2xl font-semibold tracking-tight">Bienvenido de vuelta</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Inicia sesion en tu cuenta de Turnio</p>
+        <p className="mt-1 text-sm text-muted-foreground">Inicia sesion en tu cuenta de Aurora</p>
       </div>
 
       <form onSubmit={onSubmit} className="space-y-4">

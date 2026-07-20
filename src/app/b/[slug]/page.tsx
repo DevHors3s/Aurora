@@ -12,9 +12,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const supabase = await createClient()
   const { data: business } = await supabase
     .from('businesses').select('name, address').eq('slug', slug).single()
-  if (!business) return { title: 'Turnio — Reservas online' }
+  if (!business) return { title: 'Aurora — Reservas online' }
   return {
-    title: `Reservar en ${business.name} | Turnio`,
+    title: `Reservar en ${business.name} | Aurora`,
     description: `Reserva tu cita en ${business.name}${business.address ? ` — ${business.address}` : ''}. Rapido, sin llamadas, con confirmacion por WhatsApp.`,
     openGraph: {
       title: `Reservar en ${business.name}`,
@@ -78,7 +78,7 @@ export default async function PublicBookingPage({
         </div>
 
         <p className="text-center text-xs text-zinc-400 mt-6">
-          {t('powered_by')} <span className="font-medium text-[#7C3AED]">Turnio</span>
+          {t('powered_by')} <span className="font-medium text-[#7C3AED]">Aurora</span>
         </p>
       </div>
     </div>

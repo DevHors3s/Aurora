@@ -17,7 +17,7 @@ export async function sendBookingConfirmationEmail(data: BookingEmailData) {
   if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'your_resend_api_key') return
 
   return resend.emails.send({
-    from: 'Turnio <noreply@turnio.pe>',
+    from: 'Aurora <noreply@aurora.pe>',
     to: data.to,
     subject: `Reserva confirmada en ${data.businessName}`,
     html: `
@@ -38,7 +38,7 @@ export async function sendBookingConfirmationEmail(data: BookingEmailData) {
         </div>
         <p style="color:#6B7280;font-size:14px">También recibirás un recordatorio por WhatsApp antes de tu cita.</p>
         <hr style="border:none;border-top:1px solid #E5E7EB;margin:24px 0"/>
-        <p style="color:#9CA3AF;font-size:12px;text-align:center">Powered by <strong>Turnio</strong></p>
+        <p style="color:#9CA3AF;font-size:12px;text-align:center">Powered by <strong>Aurora</strong></p>
       </div>
     `,
   })

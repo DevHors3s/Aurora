@@ -11,7 +11,7 @@ export default function OnboardingPage() {
           <span className="grid place-items-center size-8 rounded-lg bg-primary/15 text-primary">
             <Scissors className="size-4" />
           </span>
-          <span className="font-semibold">Turnio</span>
+          <span className="font-semibold">Aurora</span>
         </Link>
       </div>
       <OnboardingWizard />

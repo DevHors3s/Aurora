@@ -37,7 +37,7 @@ function NavContent({
         <span className="grid place-items-center size-8 rounded-lg bg-primary/15 text-primary">
           <Scissors className="size-4" />
         </span>
-        <span className="font-semibold">Turnio</span>
+        <span className="font-semibold">Aurora</span>
       </div>
 
       <nav className="flex-1 px-3 py-4 space-y-1">
@@ -99,7 +99,7 @@ export function Sidebar({ businessName, userEmail }: { businessName: string; use
           <span className="grid place-items-center size-7 rounded-lg bg-primary/15 text-primary">
             <Scissors className="size-3.5" />
           </span>
-          <span className="font-semibold text-sm">Turnio</span>
+          <span className="font-semibold text-sm">Aurora</span>
         </div>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>

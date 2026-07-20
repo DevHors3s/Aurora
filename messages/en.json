@@ -10,7 +10,7 @@
     "badge": "Beta — Barbershops in Lima",
     "title_1": "Your clients book themselves.",
     "title_2": "You earn more.",
-    "subtitle": "Turnio replaces the chaos of WhatsApp and notebooks with a modern appointments platform. Automatic reminders, online scheduling and zero no-shows — from S/. 49/month.",
+    "subtitle": "Aurora replaces the chaos of WhatsApp and notebooks with a modern appointments platform. Automatic reminders, online scheduling and zero no-shows — from S/. 49/month.",
     "cta_primary": "Create free account",
     "cta_secondary": "I already have an account",
     "tagline": "No credit card required · Setup in 10 minutes"
@@ -30,7 +30,7 @@
       "calendar_title": "Smart Schedule",
       "calendar_body": "Weekly calendar view. Real-time appointments per barber.",
       "link_title": "Your own booking link",
-      "link_body": "turnio.pe/b/your-barbershop — clients book in 2 minutes from their phone.",
+      "link_body": "aurora.pe/b/your-barbershop — clients book in 2 minutes from their phone.",
       "crud_title": "Full management",
       "crud_body": "Manage services, barbers and schedules. Create manual appointments in seconds.",
       "slots_title": "Real-time availability",
@@ -40,9 +40,9 @@
     }
   },
   "testimonials": {
-    "title": "Barbershops already using Turnio",
+    "title": "Barbershops already using Aurora",
     "items": [
-      { "name": "Carlos M.", "business": "Barberia El Clasico, Miraflores", "text": "I used to lose 30% of my appointments to no-shows. With Turnio they dropped to almost zero. The WhatsApp reminders are incredible." },
+      { "name": "Carlos M.", "business": "Barberia El Clasico, Miraflores", "text": "I used to lose 30% of my appointments to no-shows. With Aurora they dropped to almost zero. The WhatsApp reminders are incredible." },
       { "name": "Luis R.", "business": "Studio Fade, San Isidro", "text": "My clients love being able to book from their phone without calling. And I control everything from the dashboard. Highly recommended." },
       { "name": "Miguel A.", "business": "Kings Barber, Surco", "text": "Setup in 10 minutes and I was already receiving bookings. Managing appointments has never been this easy." }
     ]

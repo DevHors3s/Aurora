@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <span className="grid place-items-center size-9 rounded-lg bg-primary/15 text-primary">
             <Scissors className="size-4" />
           </span>
-          <span className="text-lg font-semibold">Turnio</span>
+          <span className="text-lg font-semibold">Aurora</span>
         </Link>
         <div className="rounded-2xl border border-border bg-card p-8 shadow-2xl shadow-black/40">
           {children}
