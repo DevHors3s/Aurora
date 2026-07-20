@@ -1,0 +1,120 @@
+{
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "testimonials": "Reviews",
+    "login": "Sign in",
+    "register": "Start for free"
+  },
+  "hero": {
+    "badge": "Beta — Barbershops in Lima",
+    "title_1": "Your clients book themselves.",
+    "title_2": "You earn more.",
+    "subtitle": "Turnio replaces the chaos of WhatsApp and notebooks with a modern appointments platform. Automatic reminders, online scheduling and zero no-shows — from S/. 49/month.",
+    "cta_primary": "Create free account",
+    "cta_secondary": "I already have an account",
+    "tagline": "No credit card required · Setup in 10 minutes"
+  },
+  "proof": {
+    "item_1": "Native WhatsApp",
+    "item_2": "95% penetration in Peru",
+    "item_3": "No app to install",
+    "item_4": "Spanish support"
+  },
+  "features": {
+    "title": "Everything your business needs",
+    "subtitle": "One platform, no extra apps, no complexity.",
+    "items": {
+      "whatsapp_title": "WhatsApp Reminders",
+      "whatsapp_body": "Instant confirmation and reminders 24h and 1h before. Reduce no-shows by up to 40%.",
+      "calendar_title": "Smart Schedule",
+      "calendar_body": "Weekly calendar view. Real-time appointments per barber.",
+      "link_title": "Your own booking link",
+      "link_body": "turnio.pe/b/your-barbershop — clients book in 2 minutes from their phone.",
+      "crud_title": "Full management",
+      "crud_body": "Manage services, barbers and schedules. Create manual appointments in seconds.",
+      "slots_title": "Real-time availability",
+      "slots_body": "Slots are calculated automatically based on schedules and existing bookings. No double-booking.",
+      "onboarding_title": "Onboarding in 10 minutes",
+      "onboarding_body": "Set up your business, services and barbers with a 5-step wizard."
+    }
+  },
+  "testimonials": {
+    "title": "Barbershops already using Turnio",
+    "items": [
+      { "name": "Carlos M.", "business": "Barberia El Clasico, Miraflores", "text": "I used to lose 30% of my appointments to no-shows. With Turnio they dropped to almost zero. The WhatsApp reminders are incredible." },
+      { "name": "Luis R.", "business": "Studio Fade, San Isidro", "text": "My clients love being able to book from their phone without calling. And I control everything from the dashboard. Highly recommended." },
+      { "name": "Miguel A.", "business": "Kings Barber, Surco", "text": "Setup in 10 minutes and I was already receiving bookings. Managing appointments has never been this easy." }
+    ]
+  },
+  "pricing": {
+    "title": "Pricing in Peruvian soles",
+    "subtitle": "No surprises. Cancel anytime.",
+    "popular": "Most popular",
+    "per_month": "/month",
+    "plans": [
+      { "name": "Starter", "description": "Perfect to get started", "cta": "Start free", "features": ["1 location", "Up to 3 barbers", "100 appointments / month", "WhatsApp reminders", "Booking link"] },
+      { "name": "Pro", "description": "For growing businesses", "cta": "Choose Pro", "features": ["1 location", "Unlimited barbers", "Unlimited appointments", "Everything in Starter +", "Reports & analytics"] },
+      { "name": "Agency", "description": "Multiple locations", "cta": "Contact us", "features": ["Up to 5 locations", "Everything in Pro +", "Priority support", "Custom onboarding"] }
+    ]
+  },
+  "cta": {
+    "title": "Start today, for free",
+    "subtitle": "No credit card. Setup in 10 minutes.",
+    "button": "Create my account"
+  },
+  "footer": {
+    "tagline": "Your clients book themselves.",
+    "rights": "Made in Peru."
+  },
+  "booking": {
+    "powered_by": "Powered by",
+    "no_services": "This business has no available services yet.",
+    "service_picker": {
+      "title": "Choose a service",
+      "subtitle": "Select the service you want",
+      "minutes": "min"
+    },
+    "staff_picker": {
+      "title": "Choose your barber",
+      "subtitle": "Anyone can perform the service",
+      "loading": "Loading...",
+      "no_staff": "No barbers available for this service.",
+      "back": "← Back"
+    },
+    "date_picker": {
+      "title": "Choose date and time",
+      "subtitle": "Next 2 weeks available",
+      "no_slots": "No available slots on this day.",
+      "today": "Today",
+      "continue": "Continue →",
+      "back": "← Back"
+    },
+    "client_form": {
+      "title": "Your details",
+      "subtitle": "To confirm and send your WhatsApp reminder",
+      "summary_service": "Service",
+      "summary_staff": "Barber",
+      "summary_date": "Date",
+      "summary_hour": "Time",
+      "summary_price": "Price",
+      "name_label": "Your name *",
+      "name_placeholder": "John Smith",
+      "phone_label": "WhatsApp *",
+      "phone_placeholder": "+51 987 654 321",
+      "phone_hint": "We'll send your confirmation and reminder here",
+      "submit": "Confirm booking",
+      "back": "← Back",
+      "error_name": "Your name is required",
+      "error_phone": "Your WhatsApp number is required",
+      "error_generic": "Booking error"
+    },
+    "confirmation": {
+      "title": "Booking confirmed",
+      "subtitle": "We'll send you a WhatsApp reminder",
+      "whatsapp": "Confirmation sent via WhatsApp",
+      "cancel_hint": "If you need to cancel, write directly to the business."
+    },
+    "steps": ["Service", "Barber", "Date", "Details"]
+  }
+}

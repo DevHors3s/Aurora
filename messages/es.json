@@ -1,0 +1,120 @@
+{
+  "nav": {
+    "features": "Funciones",
+    "pricing": "Precios",
+    "testimonials": "Testimonios",
+    "login": "Iniciar sesion",
+    "register": "Empezar gratis"
+  },
+  "hero": {
+    "badge": "Beta — Barberias en Lima",
+    "title_1": "Tus clientes reservan solos.",
+    "title_2": "Tu cobras mas.",
+    "subtitle": "Turnio reemplaza el caos de WhatsApp y cuaderno con una plataforma moderna de citas. Recordatorios automaticos, agenda online y cero no-shows — desde S/. 49/mes.",
+    "cta_primary": "Crear cuenta gratis",
+    "cta_secondary": "Ya tengo cuenta",
+    "tagline": "Sin tarjeta de credito · Setup en 10 minutos"
+  },
+  "proof": {
+    "item_1": "WhatsApp nativo",
+    "item_2": "95% penetracion en Peru",
+    "item_3": "Sin app que instalar",
+    "item_4": "Soporte en espanol"
+  },
+  "features": {
+    "title": "Todo lo que tu negocio necesita",
+    "subtitle": "Una plataforma, sin apps extra, sin complicaciones.",
+    "items": {
+      "whatsapp_title": "Recordatorios por WhatsApp",
+      "whatsapp_body": "Confirmacion inmediata y recordatorios 24h y 1h antes. Reduce no-shows hasta 40%.",
+      "calendar_title": "Agenda inteligente",
+      "calendar_body": "Vista semanal tipo Google Calendar. Citas en tiempo real por barbero.",
+      "link_title": "Link de reservas propio",
+      "link_body": "turnio.pe/b/tu-barberia — tus clientes reservan en 2 minutos desde su celular.",
+      "crud_title": "Gestion completa",
+      "crud_body": "CRUD de servicios, barberos y horarios. Crea citas manuales en segundos.",
+      "slots_title": "Disponibilidad en tiempo real",
+      "slots_body": "Los slots se calculan solos segun horario y citas existentes. Sin doble-booking.",
+      "onboarding_title": "Onboarding en 10 minutos",
+      "onboarding_body": "Configura tu negocio, servicios y barberos con un wizard de 5 pasos."
+    }
+  },
+  "testimonials": {
+    "title": "Barberias que ya usan Turnio",
+    "items": [
+      { "name": "Carlos M.", "business": "Barberia El Clasico, Miraflores", "text": "Antes perdia el 30% de mis citas por no-shows. Con Turnio bajaron a casi cero. Los recordatorios de WhatsApp son increibles." },
+      { "name": "Luis R.", "business": "Studio Fade, San Isidro", "text": "Mis clientes aman poder reservar desde el celular sin llamar. Y yo controlo todo desde el dashboard. Recomendado." },
+      { "name": "Miguel A.", "business": "Kings Barber, Surco", "text": "Setup en 10 minutos y ya estaba recibiendo reservas. Nunca habia sido tan facil gestionar mis citas." }
+    ]
+  },
+  "pricing": {
+    "title": "Precios en soles peruanos",
+    "subtitle": "Sin sorpresas. Cancela cuando quieras.",
+    "popular": "Mas popular",
+    "per_month": "/mes",
+    "plans": [
+      { "name": "Starter", "description": "Perfecto para empezar", "cta": "Empezar gratis", "features": ["1 local", "Hasta 3 barberos", "100 citas / mes", "Recordatorios WhatsApp", "Link de reservas"] },
+      { "name": "Pro", "description": "Para negocios en crecimiento", "cta": "Elegir Pro", "features": ["1 local", "Barberos ilimitados", "Citas ilimitadas", "Todo Starter +", "Reportes y estadisticas"] },
+      { "name": "Agencia", "description": "Multiples locales", "cta": "Contactar", "features": ["Hasta 5 locales", "Todo Pro +", "Soporte prioritario", "Onboarding personalizado"] }
+    ]
+  },
+  "cta": {
+    "title": "Empieza hoy, gratis",
+    "subtitle": "Sin tarjeta de credito. Setup en 10 minutos.",
+    "button": "Crear mi cuenta"
+  },
+  "footer": {
+    "tagline": "Tus clientes reservan solos.",
+    "rights": "Hecho en Peru."
+  },
+  "booking": {
+    "powered_by": "Powered by",
+    "no_services": "Este negocio aun no tiene servicios disponibles.",
+    "service_picker": {
+      "title": "Elige un servicio",
+      "subtitle": "Selecciona el servicio que deseas",
+      "minutes": "min"
+    },
+    "staff_picker": {
+      "title": "Elige tu barbero",
+      "subtitle": "Cualquiera puede realizar el servicio",
+      "loading": "Cargando...",
+      "no_staff": "No hay barberos disponibles para este servicio.",
+      "back": "← Volver"
+    },
+    "date_picker": {
+      "title": "Elige fecha y hora",
+      "subtitle": "Proximas 2 semanas disponibles",
+      "no_slots": "Sin horarios disponibles este dia.",
+      "today": "Hoy",
+      "continue": "Continuar →",
+      "back": "← Volver"
+    },
+    "client_form": {
+      "title": "Tus datos",
+      "subtitle": "Para confirmar y enviarte el recordatorio por WhatsApp",
+      "summary_service": "Servicio",
+      "summary_staff": "Barbero",
+      "summary_date": "Fecha",
+      "summary_hour": "Hora",
+      "summary_price": "Precio",
+      "name_label": "Tu nombre *",
+      "name_placeholder": "Juan Perez",
+      "phone_label": "WhatsApp *",
+      "phone_placeholder": "+51 987 654 321",
+      "phone_hint": "Te enviaremos la confirmacion y recordatorio por aqui",
+      "submit": "Confirmar reserva",
+      "back": "← Volver",
+      "error_name": "Tu nombre es obligatorio",
+      "error_phone": "Tu numero de WhatsApp es obligatorio",
+      "error_generic": "Error al reservar"
+    },
+    "confirmation": {
+      "title": "Reserva confirmada",
+      "subtitle": "Te enviaremos un recordatorio por WhatsApp",
+      "whatsapp": "Confirmacion enviada por WhatsApp",
+      "cancel_hint": "Si necesitas cancelar, escribe directamente al negocio."
+    },
+    "steps": ["Servicio", "Barbero", "Fecha", "Datos"]
+  }
+}
