@@ -26,18 +26,29 @@ export default function RegisterPage() {
     }
     setLoading(true)
     const supabase = createClient()
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: name } },
+      options: {
+        data: { full_name: name },
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=/onboarding`,
+      },
     })
     setLoading(false)
     if (error) {
       toast.error(error.message)
       return
     }
-    toast.success('Cuenta creada. Revisa tu email para confirmar.')
-    router.push('/onboarding')
+    if (data.session) {
+      // Confirmacion de email desactivada en el proyecto: ya hay sesion, seguimos directo.
+      router.push('/onboarding')
+      router.refresh()
+      return
+    }
+    // Confirmacion de email activada: no hay sesion todavia, no tiene sentido
+    // mandarlo a /onboarding (el proxy lo rebotaria a /login). Se queda aqui
+    // con el mensaje hasta que confirme desde su correo.
+    toast.success('Cuenta creada. Revisa tu email para confirmar tu cuenta.')
   }
 
   return (

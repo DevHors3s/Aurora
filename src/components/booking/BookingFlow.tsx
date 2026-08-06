@@ -6,6 +6,7 @@ import { ServicePicker } from './ServicePicker'
 import { StaffPicker } from './StaffPicker'
 import { DateTimePicker } from './DateTimePicker'
 import { ClientForm } from './ClientForm'
+import { DepositStep } from './DepositStep'
 import { BookingConfirmation } from './BookingConfirmation'
 import type { Service, Staff, Appointment } from '@/types'
 import { CheckCircle2 } from 'lucide-react'
@@ -24,13 +25,22 @@ export function BookingFlow({
   businessId,
   businessName,
   services,
+  depositEnabled = false,
+  depositAmount = null,
+  yapePhone = null,
+  yapeQrUrl = null,
 }: {
   businessId: string
   businessName: string
   services: Service[]
+  depositEnabled?: boolean
+  depositAmount?: number | null
+  yapePhone?: string | null
+  yapeQrUrl?: string | null
 }) {
   const t = useTranslations('booking')
-  const steps = t.raw('steps') as string[]
+  const baseSteps = t.raw('steps') as string[]
+  const steps = depositEnabled ? [...baseSteps, t('deposit_step.label')] : baseSteps
 
   const [step, setStep] = useState(0)
   const [state, setState] = useState<BookingState>({
@@ -81,11 +91,18 @@ export function BookingFlow({
           onSelect={st => { update({ staff: st, date: '', time: '' }); next() }} onBack={prev} />
       )}
       {step === 2 && state.service && state.staff && (
-        <DateTimePicker service={state.service} staff={state.staff} date={state.date} time={state.time}
+        <DateTimePicker businessId={businessId} service={state.service} staff={state.staff} date={state.date} time={state.time}
           onChange={(date, time) => update({ date, time })} onNext={next} onBack={prev} />
       )}
       {step === 3 && (
         <ClientForm state={state} businessId={businessId}
+          requiresDeposit={depositEnabled}
+          onContinue={(name, phone) => { update({ clientName: name, clientPhone: phone }); next() }}
+          onBook={appt => setAppointment(appt)} onBack={prev} />
+      )}
+      {step === 4 && depositEnabled && (
+        <DepositStep state={state} businessId={businessId}
+          depositAmount={depositAmount} yapePhone={yapePhone} yapeQrUrl={yapeQrUrl}
           onBook={appt => setAppointment(appt)} onBack={prev} />
       )}
     </div>

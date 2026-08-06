@@ -2,7 +2,7 @@
   "nav": {
     "features": "Features",
     "pricing": "Pricing",
-    "testimonials": "Reviews",
+    "testimonials": "Beta",
     "login": "Sign in",
     "register": "Start for free"
   },
@@ -10,7 +10,7 @@
     "badge": "Beta — Barbershops in Lima",
     "title_1": "Your clients book themselves.",
     "title_2": "You earn more.",
-    "subtitle": "Aurora replaces the chaos of WhatsApp and notebooks with a modern appointments platform. Automatic reminders, online scheduling and zero no-shows — from S/. 49/month.",
+    "subtitle": "Aurora replaces the chaos of WhatsApp and notebooks with a modern appointments platform. Online scheduling, WhatsApp reminders and a Yape deposit so clients don't skip on you — from S/. 49/month.",
     "cta_primary": "Create free account",
     "cta_secondary": "I already have an account",
     "tagline": "No credit card required · Setup in 10 minutes"
@@ -26,7 +26,7 @@
     "subtitle": "One platform, no extra apps, no complexity.",
     "items": {
       "whatsapp_title": "WhatsApp Reminders",
-      "whatsapp_body": "Instant confirmation and reminders 24h and 1h before. Reduce no-shows by up to 40%.",
+      "whatsapp_body": "The message is ready — send it in 1 click from your own WhatsApp. Confirmation and a 24h reminder.",
       "calendar_title": "Smart Schedule",
       "calendar_body": "Weekly calendar view. Real-time appointments per barber.",
       "link_title": "Your own booking link",
@@ -36,26 +36,25 @@
       "slots_title": "Real-time availability",
       "slots_body": "Slots are calculated automatically based on schedules and existing bookings. No double-booking.",
       "onboarding_title": "Onboarding in 10 minutes",
-      "onboarding_body": "Set up your business, services and barbers with a 5-step wizard."
+      "onboarding_body": "Set up your business, services and barbers with a 5-step wizard.",
+      "deposit_title": "Yape deposit",
+      "deposit_body": "Ask for a deposit at booking time so clients don't skip on you. You confirm the payment in 1 click."
     }
   },
-  "testimonials": {
-    "title": "Barbershops already using Aurora",
-    "items": [
-      { "name": "Carlos M.", "business": "Barberia El Clasico, Miraflores", "text": "I used to lose 30% of my appointments to no-shows. With Aurora they dropped to almost zero. The WhatsApp reminders are incredible." },
-      { "name": "Luis R.", "business": "Studio Fade, San Isidro", "text": "My clients love being able to book from their phone without calling. And I control everything from the dashboard. Highly recommended." },
-      { "name": "Miguel A.", "business": "Kings Barber, Surco", "text": "Setup in 10 minutes and I was already receiving bookings. Managing appointments has never been this easy." }
-    ]
+  "beta": {
+    "title": "Looking for 10 founding barbershops in Lima",
+    "subtitle": "We're in beta: locked-in pricing for life and direct support from the team for the first shops that join.",
+    "cta": "I want to be a founder"
   },
   "pricing": {
     "title": "Pricing in Peruvian soles",
     "subtitle": "No surprises. Cancel anytime.",
     "popular": "Most popular",
     "per_month": "/month",
+    "trial_note": "14-day free trial on any plan. No credit card required.",
     "plans": [
-      { "name": "Starter", "description": "Perfect to get started", "cta": "Start free", "features": ["1 location", "Up to 3 barbers", "100 appointments / month", "WhatsApp reminders", "Booking link"] },
-      { "name": "Pro", "description": "For growing businesses", "cta": "Choose Pro", "features": ["1 location", "Unlimited barbers", "Unlimited appointments", "Everything in Starter +", "Reports & analytics"] },
-      { "name": "Agency", "description": "Multiple locations", "cta": "Contact us", "features": ["Up to 5 locations", "Everything in Pro +", "Priority support", "Custom onboarding"] }
+      { "description": "Perfect to get started", "cta": "Start free" },
+      { "description": "For growing businesses", "cta": "Choose Pro" }
     ]
   },
   "cta": {
@@ -113,7 +112,24 @@
       "title": "Booking confirmed",
       "subtitle": "We'll send you a WhatsApp reminder",
       "whatsapp": "Confirmation sent via WhatsApp",
-      "cancel_hint": "If you need to cancel, write directly to the business."
+      "cancel_hint": "If you need to cancel, write directly to the business.",
+      "pending_title": "Booking received",
+      "pending_subtitle": "Your slot is held while we confirm your payment",
+      "pending_note": "The shop will confirm your deposit and your booking will be locked in. If there's an issue, they'll reach out on WhatsApp."
+    },
+    "deposit_step": {
+      "label": "Deposit",
+      "title": "Pay your deposit via Yape",
+      "subtitle": "To hold your slot, this business requires a deposit",
+      "amount_label": "Deposit amount",
+      "yape_to": "Yape to",
+      "no_yape": "This business hasn't set up Yape yet. Please check back later.",
+      "ref_label": "Operation code *",
+      "ref_placeholder": "E.g: 000123456",
+      "ref_hint": "You'll find it on the receipt the Yape app shows after paying",
+      "submit": "Confirm booking",
+      "back": "← Back",
+      "error_ref": "Enter your Yape operation code"
     },
     "steps": ["Service", "Barber", "Date", "Details"]
   }

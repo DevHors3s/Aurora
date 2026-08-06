@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
-import { sendWhatsApp, tplReminder24h, tplReminder1h } from '@/lib/whatsapp'
+import { createAdminClient } from '@/lib/supabase/admin'
+import { sendWhatsApp, tplReminder24h } from '@/lib/whatsapp'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 
@@ -13,7 +13,10 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const supabase = await createClient()
+  // Cliente admin: un cron no tiene sesion de usuario, y `reminders` solo
+  // tiene policy de SELECT para el dueño autenticado. Sin esto el cron
+  // siempre veia 0 filas y reportaba {sent: 0} en silencio.
+  const supabase = createAdminClient()
   const now = new Date()
   const fiveMinutesLater = new Date(now.getTime() + 5 * 60 * 1000)
 
@@ -58,8 +61,7 @@ export async function GET(req: Request) {
     }
 
     const message =
-      reminder.type === 'reminder_24h' ? tplReminder24h(tplVars) :
-      reminder.type === 'reminder_1h'  ? tplReminder1h(tplVars)  : null
+      reminder.type === 'reminder_24h' ? tplReminder24h(tplVars) : null
 
     if (!message) {
       // 'confirmation' ya se envía en el momento del booking — marcar como sent

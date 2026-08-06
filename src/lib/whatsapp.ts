@@ -45,6 +45,18 @@ Hola ${v.client_name}, tu cita en *${v.business_name}* está confirmada.
 Si necesitas cancelar, escríbenos aquí.`
 }
 
+export function tplDepositPending(v: TemplateVars) {
+  return `🕓 *¡Recibimos tu reserva!*
+
+Hola ${v.client_name}, apartamos tu horario en *${v.business_name}* mientras verificamos tu Yape.
+
+📋 Servicio: ${v.service_name}
+💈 Con: ${v.staff_name}
+📅 Fecha: ${v.date} a las ${v.time}
+
+Te avisamos apenas quede confirmada.`
+}
+
 export function tplReminder24h(v: TemplateVars) {
   return `⏰ *Recordatorio de cita*
 

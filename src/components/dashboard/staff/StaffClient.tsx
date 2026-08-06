@@ -12,10 +12,11 @@ import { Plus, MoreHorizontal, Pencil, Trash2, Users } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import type { Staff, Service } from '@/types'
 
-export function StaffClient({ staff: initial, services, businessId }: {
+export function StaffClient({ staff: initial, services, businessId, maxStaff }: {
   staff: Staff[]
   services: Service[]
   businessId: string
+  maxStaff: number | null
 }) {
   const router = useRouter()
   const [staff, setStaff] = useState(initial)
@@ -38,7 +39,15 @@ export function StaffClient({ staff: initial, services, businessId }: {
     refresh()
   }
 
-  function openCreate() { setEditing(null); setDialogOpen(true) }
+  const limitReached = maxStaff != null && staff.length >= maxStaff
+
+  function openCreate() {
+    if (limitReached) {
+      toast.error(`Tu plan permite hasta ${maxStaff} barberos. Sube de plan para agregar mas.`)
+      return
+    }
+    setEditing(null); setDialogOpen(true)
+  }
   function openEdit(s: Staff) { setEditing(s); setDialogOpen(true) }
 
   return (
@@ -46,7 +55,9 @@ export function StaffClient({ staff: initial, services, businessId }: {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-3xl font-semibold tracking-tight">Barberos</h1>
-          <p className="text-muted-foreground text-sm mt-1">{staff.length} miembro{staff.length !== 1 ? 's' : ''} en el equipo</p>
+          <p className="text-muted-foreground text-sm mt-1">
+            {staff.length}{maxStaff != null ? `/${maxStaff}` : ''} miembro{staff.length !== 1 ? 's' : ''} en el equipo
+          </p>
         </div>
         <Button onClick={openCreate} className="bg-primary hover:bg-primary/90 gap-2">
           <Plus className="size-4" /> Nuevo barbero

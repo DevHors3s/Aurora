@@ -1,9 +1,11 @@
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
+import { dayOfWeekFromYMD, zonedTimeToUtc, todayInZone } from '@/lib/tz'
 
 interface GetAvailableSlotsParams {
   staff_id: string
   service_duration_min: number
-  date: string // YYYY-MM-DD
+  date: string // YYYY-MM-DD, fecha calendario del negocio
+  timeZone: string // ej. 'America/Lima'
 }
 
 function toMinutes(hhmm: string): number {
@@ -21,18 +23,23 @@ function toHHMM(minutes: number): string {
  * Devuelve los horarios disponibles ['09:00','09:30',...] para un staff/dia/servicio.
  * Reglas:
  *  - Slot ocupado si: starts_at < slot_end AND ends_at > slot_start
- *  - Si la fecha es hoy, filtra slots ya pasados
+ *  - Si la fecha es hoy (en la zona horaria del negocio), filtra slots ya pasados
  *  - Slots cada [service_duration_min] minutos dentro del horario del barbero
+ *
+ * Usa el cliente admin (service role) porque el visitante que consulta disponibilidad
+ * es anonimo y, tras el fix de RLS, el anon key ya no puede leer `appointments`
+ * (esa tabla contiene datos personales de otros clientes). Solo se devuelven strings
+ * de hora, nunca las citas en si.
  */
 export async function getAvailableSlots({
   staff_id,
   service_duration_min,
   date,
+  timeZone,
 }: GetAvailableSlotsParams): Promise<string[]> {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
 
-  const target = new Date(`${date}T00:00:00`)
-  const dayOfWeek = target.getDay() // 0=Dom .. 6=Sab
+  const dayOfWeek = dayOfWeekFromYMD(date)
 
   const { data: schedules } = await supabase
     .from('schedules')
@@ -43,8 +50,8 @@ export async function getAvailableSlots({
 
   if (!schedules || schedules.length === 0) return []
 
-  const dayStart = new Date(`${date}T00:00:00`)
-  const dayEnd = new Date(`${date}T23:59:59`)
+  const dayStart = zonedTimeToUtc(date, '00:00', timeZone)
+  const dayEnd = zonedTimeToUtc(date, '23:59', timeZone)
 
   const { data: appointments } = await supabase
     .from('appointments')
@@ -60,7 +67,7 @@ export async function getAvailableSlots({
   }))
 
   const now = Date.now()
-  const isToday = new Date().toISOString().slice(0, 10) === date
+  const isToday = todayInZone(timeZone) === date
 
   const slots: string[] = []
   for (const block of schedules) {
@@ -71,11 +78,12 @@ export async function getAvailableSlots({
       m + service_duration_min <= endMin;
       m += service_duration_min
     ) {
-      const slotStart = new Date(`${date}T${toHHMM(m)}:00`).getTime()
+      const hhmm = toHHMM(m)
+      const slotStart = zonedTimeToUtc(date, hhmm, timeZone).getTime()
       const slotEnd = slotStart + service_duration_min * 60_000
       if (isToday && slotStart <= now) continue
       const collides = busy.some((b) => b.start < slotEnd && b.end > slotStart)
-      if (!collides) slots.push(toHHMM(m))
+      if (!collides) slots.push(hhmm)
     }
   }
   return slots

@@ -1,7 +1,10 @@
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { StatsCards } from '@/components/dashboard/StatsCards'
 import { AppointmentCard } from '@/components/dashboard/AppointmentCard'
-import { CalendarX2 } from 'lucide-react'
+import { TomorrowReminders, type TomorrowReminderRow } from '@/components/dashboard/TomorrowReminders'
+import { todayInZone, zonedTimeToUtc } from '@/lib/tz'
+import { CalendarX2, Smartphone } from 'lucide-react'
 import type { Appointment } from '@/types'
 
 const DAYS = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
@@ -23,9 +26,15 @@ export default async function DashboardHome() {
 
   const { data: business } = await supabase
     .from('businesses')
-    .select('id, name')
+    .select('id, name, timezone')
     .eq('owner_id', user!.id)
     .single()
+
+  const { count: pendingDeposits } = await supabase
+    .from('appointments')
+    .select('id', { count: 'exact', head: true })
+    .eq('business_id', business!.id)
+    .eq('deposit_status', 'pending')
 
   const now = new Date()
   const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
@@ -40,6 +49,42 @@ export default async function DashboardHome() {
     .order('starts_at', { ascending: true })
 
   const appts = (rawAppts ?? []) as Appointment[]
+
+  // Widget de recordatorios de mañana: reusa los recordatorios que ya
+  // programa /api/bookings (tabla `reminders`), solo filtra los de mañana.
+  const timeZone = (business!.timezone as string) ?? 'America/Lima'
+  const todayStr = todayInZone(timeZone)
+  const [ty, tm, td] = todayStr.split('-').map(Number)
+  const tomorrowStr = new Date(Date.UTC(ty, tm - 1, td + 1)).toISOString().slice(0, 10)
+  const tomorrowStart = zonedTimeToUtc(tomorrowStr, '00:00', timeZone).getTime()
+  const tomorrowEnd = zonedTimeToUtc(tomorrowStr, '23:59', timeZone).getTime()
+
+  const { data: rawReminders } = await supabase
+    .from('reminders')
+    .select('id, appointment:appointments(client_name, client_phone, starts_at, status, service:services(name), staff(name))')
+    .eq('type', 'reminder_24h')
+    .eq('status', 'pending')
+
+  const tomorrowReminders: TomorrowReminderRow[] = (rawReminders ?? [])
+    .map((r) => {
+      const appt = r.appointment as unknown as {
+        client_name: string; client_phone: string; starts_at: string; status: string
+        service: { name: string } | null; staff: { name: string } | null
+      } | null
+      if (!appt || appt.status !== 'confirmed') return null
+      const startsAtMs = new Date(appt.starts_at).getTime()
+      if (startsAtMs < tomorrowStart || startsAtMs > tomorrowEnd) return null
+      return {
+        reminderId: r.id as string,
+        clientName: appt.client_name,
+        clientPhone: appt.client_phone,
+        startsAt: appt.starts_at,
+        serviceName: appt.service?.name ?? '',
+        staffName: appt.staff?.name ?? '',
+      }
+    })
+    .filter((x): x is TomorrowReminderRow => x !== null)
+    .sort((a, b) => a.startsAt.localeCompare(b.startsAt))
 
   const stats = {
     total: appts.length,
@@ -62,7 +107,19 @@ export default async function DashboardHome() {
         </h1>
       </header>
 
+      {!!pendingDeposits && pendingDeposits > 0 && (
+        <Link
+          href="/appointments"
+          className="flex items-center gap-3 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-5 py-4 text-sm text-amber-300 transition hover:bg-amber-500/15"
+        >
+          <Smartphone className="size-4 shrink-0" />
+          Tienes {pendingDeposits} {pendingDeposits === 1 ? 'reserva esperando' : 'reservas esperando'} que confirmes su adelanto por Yape.
+        </Link>
+      )}
+
       <StatsCards stats={stats} />
+
+      <TomorrowReminders rows={tomorrowReminders} businessName={business!.name as string} />
 
       <section className="space-y-4">
         <div className="flex items-center justify-between">
@@ -85,7 +142,7 @@ export default async function DashboardHome() {
         ) : (
           <div className="space-y-2">
             {appts.map((a) => (
-              <AppointmentCard key={a.id} appt={a} />
+              <AppointmentCard key={a.id} appt={a} businessName={business!.name as string} />
             ))}
           </div>
         )}

@@ -73,6 +73,10 @@ export default async function PublicBookingPage({
               businessId={business.id as string}
               businessName={business.name as string}
               services={activeServices}
+              depositEnabled={business.deposit_enabled as boolean}
+              depositAmount={business.deposit_amount as number | null}
+              yapePhone={business.yape_phone as string | null}
+              yapeQrUrl={business.yape_qr_url as string | null}
             />
           )}
         </div>

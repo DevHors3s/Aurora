@@ -2,7 +2,7 @@
   "nav": {
     "features": "Funciones",
     "pricing": "Precios",
-    "testimonials": "Testimonios",
+    "testimonials": "Beta",
     "login": "Iniciar sesion",
     "register": "Empezar gratis"
   },
@@ -10,7 +10,7 @@
     "badge": "Beta — Barberias en Lima",
     "title_1": "Tus clientes reservan solos.",
     "title_2": "Tu cobras mas.",
-    "subtitle": "Aurora reemplaza el caos de WhatsApp y cuaderno con una plataforma moderna de citas. Recordatorios automaticos, agenda online y cero no-shows — desde S/. 49/mes.",
+    "subtitle": "Aurora reemplaza el caos de WhatsApp y cuaderno con una plataforma moderna de citas. Agenda online, recordatorios por WhatsApp y adelanto por Yape para que tus clientes no te dejen plantado — desde S/. 49/mes.",
     "cta_primary": "Crear cuenta gratis",
     "cta_secondary": "Ya tengo cuenta",
     "tagline": "Sin tarjeta de credito · Setup en 10 minutos"
@@ -26,7 +26,7 @@
     "subtitle": "Una plataforma, sin apps extra, sin complicaciones.",
     "items": {
       "whatsapp_title": "Recordatorios por WhatsApp",
-      "whatsapp_body": "Confirmacion inmediata y recordatorios 24h y 1h antes. Reduce no-shows hasta 40%.",
+      "whatsapp_body": "Arma el mensaje y mandalo en 1 clic desde tu propio WhatsApp. Confirmacion y recordatorio 24h antes.",
       "calendar_title": "Agenda inteligente",
       "calendar_body": "Vista semanal tipo Google Calendar. Citas en tiempo real por barbero.",
       "link_title": "Link de reservas propio",
@@ -36,26 +36,25 @@
       "slots_title": "Disponibilidad en tiempo real",
       "slots_body": "Los slots se calculan solos segun horario y citas existentes. Sin doble-booking.",
       "onboarding_title": "Onboarding en 10 minutos",
-      "onboarding_body": "Configura tu negocio, servicios y barberos con un wizard de 5 pasos."
+      "onboarding_body": "Configura tu negocio, servicios y barberos con un wizard de 5 pasos.",
+      "deposit_title": "Adelanto por Yape",
+      "deposit_body": "Pide un adelanto al reservar para que tus clientes no te dejen plantado. Tu confirmas el pago con 1 clic."
     }
   },
-  "testimonials": {
-    "title": "Barberias que ya usan Aurora",
-    "items": [
-      { "name": "Carlos M.", "business": "Barberia El Clasico, Miraflores", "text": "Antes perdia el 30% de mis citas por no-shows. Con Aurora bajaron a casi cero. Los recordatorios de WhatsApp son increibles." },
-      { "name": "Luis R.", "business": "Studio Fade, San Isidro", "text": "Mis clientes aman poder reservar desde el celular sin llamar. Y yo controlo todo desde el dashboard. Recomendado." },
-      { "name": "Miguel A.", "business": "Kings Barber, Surco", "text": "Setup en 10 minutos y ya estaba recibiendo reservas. Nunca habia sido tan facil gestionar mis citas." }
-    ]
+  "beta": {
+    "title": "Buscamos 10 barberias fundadoras en Lima",
+    "subtitle": "Estamos en beta: precio congelado de por vida y soporte directo con el equipo para las primeras barberias que se unan.",
+    "cta": "Quiero ser fundadora"
   },
   "pricing": {
     "title": "Precios en soles peruanos",
     "subtitle": "Sin sorpresas. Cancela cuando quieras.",
     "popular": "Mas popular",
     "per_month": "/mes",
+    "trial_note": "14 dias de prueba gratis en cualquier plan. Sin tarjeta de credito.",
     "plans": [
-      { "name": "Starter", "description": "Perfecto para empezar", "cta": "Empezar gratis", "features": ["1 local", "Hasta 3 barberos", "100 citas / mes", "Recordatorios WhatsApp", "Link de reservas"] },
-      { "name": "Pro", "description": "Para negocios en crecimiento", "cta": "Elegir Pro", "features": ["1 local", "Barberos ilimitados", "Citas ilimitadas", "Todo Starter +", "Reportes y estadisticas"] },
-      { "name": "Agencia", "description": "Multiples locales", "cta": "Contactar", "features": ["Hasta 5 locales", "Todo Pro +", "Soporte prioritario", "Onboarding personalizado"] }
+      { "description": "Perfecto para empezar", "cta": "Empezar gratis" },
+      { "description": "Para negocios en crecimiento", "cta": "Elegir Pro" }
     ]
   },
   "cta": {
@@ -113,7 +112,24 @@
       "title": "Reserva confirmada",
       "subtitle": "Te enviaremos un recordatorio por WhatsApp",
       "whatsapp": "Confirmacion enviada por WhatsApp",
-      "cancel_hint": "Si necesitas cancelar, escribe directamente al negocio."
+      "cancel_hint": "Si necesitas cancelar, escribe directamente al negocio.",
+      "pending_title": "Reserva recibida",
+      "pending_subtitle": "Tu horario queda apartado mientras confirmamos tu pago",
+      "pending_note": "La barberia confirmara tu adelanto y tu cita quedara reservada. Si hay algun problema, te contactaran por WhatsApp."
+    },
+    "deposit_step": {
+      "label": "Adelanto",
+      "title": "Adelanta tu cita por Yape",
+      "subtitle": "Para asegurar tu horario, la barberia pide un adelanto",
+      "amount_label": "Monto a adelantar",
+      "yape_to": "Yapea a",
+      "no_yape": "Este negocio aun no configuro su Yape. Vuelve mas tarde.",
+      "ref_label": "Codigo de operacion *",
+      "ref_placeholder": "Ej: 000123456",
+      "ref_hint": "Lo encuentras en el comprobante que te muestra la app de Yape luego de pagar",
+      "submit": "Confirmar reserva",
+      "back": "← Volver",
+      "error_ref": "Ingresa el codigo de operacion de tu Yape"
     },
     "steps": ["Servicio", "Barbero", "Fecha", "Datos"]
   }

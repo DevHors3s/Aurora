@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { StaffClient } from '@/components/dashboard/staff/StaffClient'
+import { limitsForPlan } from '@/lib/plans'
 import type { Staff, Service } from '@/types'
 
 export default async function StaffPage() {
@@ -9,7 +10,7 @@ export default async function StaffPage() {
   if (!user) redirect('/login')
 
   const { data: business } = await supabase
-    .from('businesses').select('id').eq('owner_id', user.id).maybeSingle()
+    .from('businesses').select('id, plan').eq('owner_id', user.id).maybeSingle()
 
   let staff: Staff[] = []
   let services: Service[] = []
@@ -22,9 +23,11 @@ export default async function StaffPage() {
     services = (servicesRes.data as Service[]) ?? []
   }
 
+  const maxStaff = business ? limitsForPlan(business.plan).maxStaff : null
+
   return (
     <div className="p-6 lg:p-10">
-      <StaffClient staff={staff} services={services} businessId={business?.id ?? ''} />
+      <StaffClient staff={staff} services={services} businessId={business?.id ?? ''} maxStaff={maxStaff} />
     </div>
   )
 }

@@ -37,6 +37,9 @@ export async function proxy(request: NextRequest) {
     '/services',
     '/settings',
     '/onboarding',
+    // Solo se llega aca con una sesion de recuperacion valida, establecida
+    // por /auth/callback tras el link del email. Sin sesion, no debe verse el form.
+    '/reset-password',
   ]
   const isProtected = protectedPaths.some((p) =>
     request.nextUrl.pathname.startsWith(p),

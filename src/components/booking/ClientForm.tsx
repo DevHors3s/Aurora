@@ -15,11 +15,13 @@ import type { Appointment } from '@/types'
 interface Props {
   state: BookingState
   businessId: string
+  requiresDeposit?: boolean
+  onContinue?: (name: string, phone: string) => void
   onBook: (appt: Appointment) => void
   onBack: () => void
 }
 
-export function ClientForm({ state, businessId, onBook, onBack }: Props) {
+export function ClientForm({ state, businessId, requiresDeposit, onContinue, onBook, onBack }: Props) {
   const t = useTranslations('booking.client_form')
   const locale = useLocale()
   const dateLocale = locale === 'en' ? enUS : es
@@ -31,6 +33,13 @@ export function ClientForm({ state, businessId, onBook, onBack }: Props) {
   async function submit() {
     if (!name.trim()) { toast.error(t('error_name')); return }
     if (!phone.trim()) { toast.error(t('error_phone')); return }
+
+    // Con adelanto: todavia falta el paso de Yape, no se reserva aqui.
+    if (requiresDeposit) {
+      onContinue?.(name, phone)
+      return
+    }
+
     setLoading(true)
     const res = await fetch('/api/bookings', {
       method: 'POST',

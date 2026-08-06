@@ -1,16 +1,17 @@
 import Link from 'next/link'
-import { ArrowRight, MessageCircle, Calendar, Zap, CheckCircle2, Scissors, Star } from 'lucide-react'
+import { ArrowRight, MessageCircle, Calendar, Zap, CheckCircle2, Scissors, Star, Rocket, Smartphone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { LanguageToggle } from '@/components/LanguageToggle'
+import { PLANS } from '@/lib/plans'
 
 export default async function Home() {
   const locale = await getLocale()
   const t = await getTranslations()
 
-  const featureIcons = [MessageCircle, Calendar, Zap, CheckCircle2, Star, Scissors]
-  const featureKeys = ['whatsapp', 'calendar', 'link', 'crud', 'slots', 'onboarding'] as const
+  const featureIcons = [MessageCircle, Calendar, Zap, CheckCircle2, Star, Scissors, Smartphone]
+  const featureKeys = ['whatsapp', 'calendar', 'link', 'crud', 'slots', 'onboarding', 'deposit'] as const
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -100,24 +101,19 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Beta */}
       <section id="testimonials" className="bg-card/50 border-y border-border py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-3xl font-semibold text-center mb-12">{t('testimonials.title')}</h2>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {([0, 1, 2] as const).map(i => (
-              <div key={i} className="rounded-2xl border border-border bg-card p-6 space-y-4">
-                <div className="flex gap-1">
-                  {Array.from({ length: 5 }).map((_, s) => <Star key={s} className="size-4 fill-amber-400 text-amber-400" />)}
-                </div>
-                <p className="text-sm text-muted-foreground italic">"{t(`testimonials.items.${i}.text`)}"</p>
-                <div>
-                  <p className="font-semibold text-sm">{t(`testimonials.items.${i}.name`)}</p>
-                  <p className="text-xs text-muted-foreground">{t(`testimonials.items.${i}.business`)}</p>
-                </div>
-              </div>
-            ))}
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <div className="mx-auto grid place-items-center size-12 rounded-2xl bg-primary/15 text-primary mb-6">
+            <Rocket className="size-5" />
           </div>
+          <h2 className="text-3xl font-semibold">{t('beta.title')}</h2>
+          <p className="mt-3 text-muted-foreground">{t('beta.subtitle')}</p>
+          <Link href="/register" className="mt-8 inline-flex">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 gap-2 px-8">
+              {t('beta.cta')} <ArrowRight className="size-4" />
+            </Button>
+          </Link>
         </div>
       </section>
 
@@ -127,27 +123,27 @@ export default async function Home() {
           <h2 className="text-3xl sm:text-4xl font-semibold">{t('pricing.title')}</h2>
           <p className="mt-3 text-muted-foreground">{t('pricing.subtitle')}</p>
         </div>
-        <div className="grid sm:grid-cols-3 gap-6 items-start">
-          {([0, 1, 2] as const).map(i => {
-            const highlight = i === 1
-            const features = t.raw(`pricing.plans.${i}.features`) as string[]
+        <div className="grid sm:grid-cols-2 gap-6 items-start max-w-2xl mx-auto">
+          {(['starter', 'pro'] as const).map((planId, i) => {
+            const plan = PLANS[planId]
+            const highlight = planId === 'pro'
             return (
-              <div key={i} className={`rounded-2xl border p-6 space-y-6 relative ${highlight ? 'border-primary bg-primary/5' : 'border-border bg-card'}`}>
+              <div key={planId} className={`rounded-2xl border p-6 space-y-6 relative ${highlight ? 'border-primary bg-primary/5' : 'border-border bg-card'}`}>
                 {highlight && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                     <Badge className="bg-primary text-white border-0">{t('pricing.popular')}</Badge>
                   </div>
                 )}
                 <div>
-                  <p className="font-semibold">{t(`pricing.plans.${i}.name`)}</p>
+                  <p className="font-semibold">{plan.name}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">{t(`pricing.plans.${i}.description`)}</p>
                   <div className="mt-4 flex items-baseline gap-1">
-                    <span className="text-4xl font-bold">S/. {[49, 99, 199][i]}</span>
+                    <span className="text-4xl font-bold">S/. {plan.price}</span>
                     <span className="text-muted-foreground text-sm">{t('pricing.per_month')}</span>
                   </div>
                 </div>
                 <ul className="space-y-2">
-                  {features.map(f => (
+                  {plan.features.map(f => (
                     <li key={f} className="flex items-center gap-2 text-sm">
                       <CheckCircle2 className="size-4 text-primary shrink-0" />{f}
                     </li>
@@ -162,6 +158,7 @@ export default async function Home() {
             )
           })}
         </div>
+        <p className="mt-6 text-center text-xs text-muted-foreground">{t('pricing.trial_note')}</p>
       </section>
 
       {/* CTA final */}

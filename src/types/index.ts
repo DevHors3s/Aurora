@@ -7,6 +7,9 @@ export type AppointmentStatus =
 
 export type ReminderType = 'confirmation' | 'reminder_24h' | 'reminder_1h'
 export type ReminderStatus = 'pending' | 'sent' | 'failed'
+export type DepositStatus = 'not_required' | 'pending' | 'verified' | 'rejected'
+export type Plan = 'trial' | 'starter' | 'pro'
+export type SubscriptionStatus = 'active' | 'past_due' | 'cancelled'
 
 export interface Business {
   id: string
@@ -20,6 +23,13 @@ export interface Business {
   is_active: boolean
   created_at: string
   updated_at: string
+  deposit_enabled: boolean
+  deposit_amount: number | null
+  yape_phone: string | null
+  yape_qr_url: string | null
+  plan: Plan
+  trial_ends_at: string
+  subscription_status: SubscriptionStatus
 }
 
 export interface Staff {
@@ -64,6 +74,8 @@ export interface Appointment {
   status: AppointmentStatus
   notes: string | null
   created_at: string
+  deposit_status: DepositStatus
+  deposit_ref: string | null
   staff?: Staff
   service?: Service
 }
@@ -86,4 +98,5 @@ export interface BookingFormData {
   time: string
   client_name: string
   client_phone: string
+  deposit_ref?: string
 }

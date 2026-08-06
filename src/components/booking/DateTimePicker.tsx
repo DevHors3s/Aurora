@@ -11,6 +11,7 @@ import type { Service, Staff } from '@/types'
 import { cn } from '@/lib/utils'
 
 interface Props {
+  businessId: string
   service: Service
   staff: Staff
   date: string
@@ -20,7 +21,7 @@ interface Props {
   onBack: () => void
 }
 
-export function DateTimePicker({ service, staff, date, time, onChange, onNext, onBack }: Props) {
+export function DateTimePicker({ businessId, service, staff, date, time, onChange, onNext, onBack }: Props) {
   const t = useTranslations('booking.date_picker')
   const locale = useLocale()
   const dateLocale = locale === 'en' ? enUS : es
@@ -32,11 +33,11 @@ export function DateTimePicker({ service, staff, date, time, onChange, onNext, o
   useEffect(() => {
     if (!date) return
     setLoadingSlots(true)
-    fetch(`/api/availability?staff_id=${staff.id}&service_id=${service.id}&date=${date}`)
+    fetch(`/api/availability?staff_id=${staff.id}&service_id=${service.id}&business_id=${businessId}&date=${date}`)
       .then(r => r.json())
       .then(j => setSlots(j.slots ?? []))
       .finally(() => setLoadingSlots(false))
-  }, [date, staff.id, service.id])
+  }, [date, staff.id, service.id, businessId])
 
   return (
     <div className="space-y-5">

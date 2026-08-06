@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
@@ -10,7 +9,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { toast } from 'sonner'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
-import { Search, MoreHorizontal, CheckCircle2, XCircle, UserX, CalendarX2, Plus } from 'lucide-react'
+import { Search, MoreHorizontal, CheckCircle2, XCircle, UserX, CalendarX2, Plus, Smartphone } from 'lucide-react'
 import type { Appointment, AppointmentStatus } from '@/types'
 import { useRouter } from 'next/navigation'
 import { NewAppointmentDialog } from './NewAppointmentDialog'
@@ -35,15 +34,37 @@ export function AppointmentsClient({ appointments: initial, businessId }: { appo
   const [newOpen, setNewOpen] = useState(false)
 
   const filtered = appointments
-    .filter(a => statusFilter === 'all' || a.status === statusFilter)
+    .filter(a => statusFilter === 'all' || (statusFilter === 'deposit_pending' ? a.deposit_status === 'pending' : a.status === statusFilter))
     .filter(a => !search || a.client_name.toLowerCase().includes(search.toLowerCase()) || a.client_phone.includes(search))
 
   async function changeStatus(appt: Appointment, status: AppointmentStatus) {
-    const supabase = createClient()
-    const { error } = await supabase.from('appointments').update({ status }).eq('id', appt.id)
-    if (error) { toast.error(error.message); return }
+    const res = await fetch(`/api/appointments/${appt.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status }),
+    })
+    const json = await res.json()
+    if (!res.ok) { toast.error(json.error ?? 'Error al actualizar'); return }
     toast.success(`Cita marcada como ${STATUS_LABEL[status].toLowerCase()}`)
     setAppointments(prev => prev.map(a => a.id === appt.id ? { ...a, status } : a))
+    router.refresh()
+  }
+
+  async function verifyDeposit(appt: Appointment, verified: boolean) {
+    const res = await fetch(`/api/appointments/${appt.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        status: verified ? 'confirmed' : 'cancelled',
+        deposit_status: verified ? 'verified' : 'rejected',
+      }),
+    })
+    const json = await res.json()
+    if (!res.ok) { toast.error(json.error ?? 'Error al actualizar'); return }
+    toast.success(verified ? 'Pago verificado, cita confirmada' : 'Pago rechazado, cita cancelada')
+    setAppointments(prev => prev.map(a => a.id === appt.id
+      ? { ...a, status: verified ? 'confirmed' : 'cancelled', deposit_status: verified ? 'verified' : 'rejected' }
+      : a))
     router.refresh()
   }
 
@@ -71,6 +92,7 @@ export function AppointmentsClient({ appointments: initial, businessId }: { appo
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todos</SelectItem>
+            <SelectItem value="deposit_pending">Por confirmar (adelanto)</SelectItem>
             <SelectItem value="confirmed">Confirmadas</SelectItem>
             <SelectItem value="pending">Pendientes</SelectItem>
             <SelectItem value="completed">Completadas</SelectItem>
@@ -114,12 +136,28 @@ export function AppointmentsClient({ appointments: initial, businessId }: { appo
                     {format(new Date(a.starts_at), "d MMM · HH:mm", { locale: es })}
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs px-2 py-1 rounded-full border ${STATUS_STYLES[a.status]}`}>
-                      {STATUS_LABEL[a.status]}
-                    </span>
+                    <div className="flex flex-col gap-1 items-start">
+                      <span className={`text-xs px-2 py-1 rounded-full border ${STATUS_STYLES[a.status]}`}>
+                        {STATUS_LABEL[a.status]}
+                      </span>
+                      {a.deposit_status === 'pending' && (
+                        <span className="flex items-center gap-1 text-[11px] text-amber-400">
+                          <Smartphone className="size-3" /> Yape: {a.deposit_ref}
+                        </span>
+                      )}
+                    </div>
                   </td>
                   <td className="px-4 py-3">
-                    {a.status !== 'completed' && a.status !== 'cancelled' && (
+                    {a.deposit_status === 'pending' ? (
+                      <div className="flex gap-1">
+                        <Button size="sm" variant="outline" className="h-7 text-xs border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/10" onClick={() => verifyDeposit(a, true)}>
+                          Confirmar pago
+                        </Button>
+                        <Button size="sm" variant="outline" className="h-7 text-xs border-red-500/30 text-red-300 hover:bg-red-500/10" onClick={() => verifyDeposit(a, false)}>
+                          Rechazar
+                        </Button>
+                      </div>
+                    ) : a.status !== 'completed' && a.status !== 'cancelled' && (
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button variant="ghost" size="icon" className="size-8">

@@ -7,9 +7,13 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 import { Loader2, Users, Plus, Trash2 } from 'lucide-react'
+import { limitsForPlan } from '@/lib/plans'
 import type { OnboardingState } from './OnboardingWizard'
 
 interface StaffDraft { name: string }
+
+// El negocio arranca en 'trial', que aplica los limites de Starter.
+const MAX_STAFF = limitsForPlan('trial').maxStaff ?? Infinity
 
 interface Props {
   state: OnboardingState
@@ -22,7 +26,13 @@ export function StepStaff({ state, updateState, onNext, onBack }: Props) {
   const [staffList, setStaffList] = useState<StaffDraft[]>([{ name: '' }])
   const [loading, setLoading] = useState(false)
 
-  function add() { setStaffList(prev => [...prev, { name: '' }]) }
+  function add() {
+    if (staffList.length >= MAX_STAFF) {
+      toast.error(`Tu plan de prueba permite hasta ${MAX_STAFF} barberos. Podras subir de plan mas adelante.`)
+      return
+    }
+    setStaffList(prev => [...prev, { name: '' }])
+  }
   function remove(i: number) { setStaffList(prev => prev.filter((_, idx) => idx !== i)) }
   function update(i: number, val: string) {
     setStaffList(prev => prev.map((s, idx) => idx === i ? { name: val } : s))
